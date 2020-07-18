@@ -2,11 +2,20 @@
 
 namespace Green_vs_Red
 {
-	class Program
+	public class Program
 	{
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
-			Console.WriteLine("Hello, world!");
+			try
+			{
+				Cell cell = new Cell(1);
+				Console.WriteLine(cell);
+			}
+			catch (Exception exception)
+			{
+				Console.WriteLine(exception.Message);
+				Console.WriteLine(exception.StackTrace);
+			}
 		}
 	}
 }
