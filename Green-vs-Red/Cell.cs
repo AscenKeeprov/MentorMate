@@ -9,7 +9,7 @@ namespace Green_vs_Red
 		internal string State
 		{
 			get => this._cellState.ToString();
-			private set
+			set
 			{
 				if (!Enum.TryParse(value, true, out CellState cellState)
 					|| !Enum.IsDefined(typeof(CellState), cellState))
@@ -28,8 +28,6 @@ namespace Green_vs_Red
 		}
 
 		internal Cell() { }
-
-		internal Cell(byte state) : this(state.ToString()) { }
 
 		internal Cell(string state)
 		{

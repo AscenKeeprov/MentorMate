@@ -8,8 +8,9 @@ namespace Green_vs_Red
 		{
 			try
 			{
-				Cell cell = new Cell(1);
-				Console.WriteLine(cell);
+				Grid grid = new Grid(4, 4);
+				grid.Generate();
+				grid.Print();
 			}
 			catch (Exception exception)
 			{
