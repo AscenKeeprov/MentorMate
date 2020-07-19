@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace Green_vs_Red
+namespace Green_vs_Red.Core
 {
 	internal class Grid
 	{

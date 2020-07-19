@@ -1,4 +1,4 @@
-﻿namespace Green_vs_Red
+﻿namespace Green_vs_Red.Core
 {
 	internal enum CellState : byte
 	{

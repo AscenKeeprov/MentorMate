@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Green_vs_Red.Core;
+using System;
 
 namespace Green_vs_Red
 {

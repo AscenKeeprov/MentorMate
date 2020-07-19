@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Green_vs_Red
+namespace Green_vs_Red.Core
 {
 	internal class Cell
 	{
