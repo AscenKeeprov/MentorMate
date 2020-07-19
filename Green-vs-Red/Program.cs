@@ -12,6 +12,7 @@ namespace Green_vs_Red
 				Grid grid = new Grid(4, 4);
 				grid.Generate();
 				grid.Print();
+				grid.Generate();
 			}
 			catch (Exception exception)
 			{
