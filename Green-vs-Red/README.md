@@ -13,10 +13,10 @@ __Task__:
 Create a program that accepts:
 
 ➔ The dimensions of the grid in cells - **`W`** (width) and **`H`** (height)  
-➔ Coordinates **`X`** and **`Y`** specifying a cell to be observed  
-➔ A number **`N`** denoting the total amount of states that should be generated  
+➔ Coordinates **`X`** and **`Y`** specifying a cell to be tracked  
+➔ A number **`N`** denoting the turn until which the cell should be tracked  
 
-As soon as the dimensions of the grid are specified, "Generation Zero" comprising sequences of zeroes and ones should be displayed on screen. Afterwards, a cell will be picked based on the provided coordinates. The aim of the program is to calculate how many times the target cell is green from generation 0 to generation N, both included, then print the result in the console.
+As soon as the dimensions of the grid are specified, the player is asked to enter sequences of zeroes and ones representing "Generation Zero". Once an initial grid state is available, subsequent states can be derived from it whilst the chosen cell is being monitored. The aim of the program is to calculate how many times the target cell is green from generation 0 to generation N, both included, then print the result in the console.
 
 Make sure that the program uses several classes, a uniform naming convention, some useful comments and documentation. This will demonstrate your knowledge of OOP and good coding practices thus accruing more points during evaluation.
 ___________________
