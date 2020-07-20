@@ -9,10 +9,13 @@ namespace Green_vs_Red
 		{
 			try
 			{
-				Grid grid = new Grid(4, 4);
-				grid.Generate();
+				Grid grid = new Grid(15, 8);
 				grid.Print();
-				grid.Generate();
+				for (int generation = 1; generation <= 6; generation++)
+				{
+					grid.GenerateNext();
+					grid.Print();
+				}
 			}
 			catch (Exception exception)
 			{
