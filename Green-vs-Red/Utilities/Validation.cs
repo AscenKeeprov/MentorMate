@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Green_vs_Red.Utilities
 {
-	public static class Parser
+	public static class Validation
 	{
 		public static bool TryParse<T>(string input, out T output)
 		{
