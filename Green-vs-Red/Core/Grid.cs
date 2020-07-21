@@ -20,9 +20,10 @@ namespace Green_vs_Red.Core
 
 		internal void AddCell(ushort x, ushort y, CellState state) => this.cells[y, x] = new Cell((x, y), state);
 
-		internal void Generate()
+		internal bool Generate()
 		{
 			Cell[,] newCells = new Cell[this.Height, this.Width];
+			bool statesChanged = false;
 			for (ushort y = 0; y < this.Height; y++)
 			{
 				for (ushort x = 0; x < this.Width; x++)
@@ -37,6 +38,7 @@ namespace Green_vs_Red.Core
 							if (cell.State == CellState.Green)
 							{
 								newCells[y, x] = new Cell((x, y), CellState.Red);
+								statesChanged = true;
 								continue;
 							}
 							goto default;
@@ -46,6 +48,7 @@ namespace Green_vs_Red.Core
 							if (cell.State == CellState.Red)
 							{
 								newCells[y, x] = new Cell((x, y), CellState.Green);
+								statesChanged = true;
 								continue;
 							}
 							goto default;
@@ -61,6 +64,7 @@ namespace Green_vs_Red.Core
 				}
 			}
 			this.cells = newCells;
+			return statesChanged;
 		}
 
 		internal Cell GetCellAt(ushort x, ushort y) => cells[y, x];
@@ -84,9 +88,9 @@ namespace Green_vs_Red.Core
 		{
 			ConsoleColor defaultBackColour = Console.BackgroundColor;
 			ConsoleColor defaultForeColour = Console.ForegroundColor;
-			Console.BackgroundColor = ConsoleColor.White;
 			for (ushort y = 0; y < this.Height; y++)
 			{
+				Console.BackgroundColor = ConsoleColor.White;
 				for (ushort x = 0; x < this.Width; x++)
 				{
 					Cell cell = this.cells[y, x];
@@ -94,11 +98,11 @@ namespace Green_vs_Red.Core
 						Console.ForegroundColor = foreColour;
 					else Console.ForegroundColor = ConsoleColor.Gray;
 					Console.Write(cell.Value);
-					if (x == this.Width - 1) Console.Write(Environment.NewLine);
 				}
+				Console.BackgroundColor = defaultBackColour;
+				Console.ForegroundColor = defaultForeColour;
+				Console.Write(Environment.NewLine);
 			}
-			Console.BackgroundColor = defaultBackColour;
-			Console.ForegroundColor = defaultForeColour;
 			Console.Write(Environment.NewLine);
 		}
 	}

@@ -35,13 +35,27 @@ namespace Green_vs_Red
 				Console.WriteLine("Finally, specify until which turn the cell should be tracked.");
 				ulong endTurn = ParseInput<ulong>("End turn number: ", (n) => n > 0);
 				Console.WriteLine("Configuration complete. Pressing a key will run the scenario.");
-				Console.WriteLine("Press [G] if you want to see the grid after each turn.");
+				Console.WriteLine("Press [G] if you want to see the grid on each turn.");
 				bool showAllGrids = Console.ReadKey(true).Key == ConsoleKey.G;
-				for (ulong generation = 1; generation <= endTurn; generation++)
+				ulong greenTargetCellStates = targetCell.State == CellState.Green ? 1U : 0;
+				for (ulong turn = 1; turn <= endTurn; turn++)
 				{
-					grid.Generate();
-					if (showAllGrids) grid.Print();
+					bool gridChanged = grid.Generate();
+					targetCell = grid.GetCellAt(targetCellCoordinateX, targetCellCoordinateY);
+					if (gridChanged)
+					{
+						if (targetCell.State == CellState.Green) greenTargetCellStates++;
+						if (showAllGrids) grid.Print();
+					}
+					else
+					{
+						ulong skippedTurns = endTurn - turn + 1;
+						if (targetCell.State == CellState.Green) greenTargetCellStates += skippedTurns;
+						if (showAllGrids) Console.WriteLine($"Skipping {skippedTurns} turns as the grid has stopped changing.");
+						break;
+					}
 				}
+				Console.WriteLine($"Simulation ended. Target cell was green {greenTargetCellStates} time{(greenTargetCellStates == 1 ? string.Empty : "s")}.");
 			}
 			catch (Exception exception)
 			{

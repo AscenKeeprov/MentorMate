@@ -23,6 +23,19 @@ namespace Green_vs_Red.Core
 			this.State = state;
 		}
 
+		public override bool Equals(object obj)
+		{
+			Cell that = obj as Cell;
+			if (that == null) return false;
+			return this.Coordinates.Equals(that.Coordinates)
+				&& this.State.Equals(that.State);
+		}
+
+		public override int GetHashCode()
+		{
+			return this.Coordinates.GetHashCode() + this.State.GetHashCode();
+		}
+
 		public override string ToString() => $"{this.Coordinates} {this.State} [{this.Value}]";
 	}
 }
