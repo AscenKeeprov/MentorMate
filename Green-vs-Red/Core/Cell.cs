@@ -6,8 +6,17 @@ namespace Green_vs_Red.Core
 	{
 		internal (ushort X, ushort Y) Coordinates { get; private set; }
 
+		/// <summary>
+		/// Gets the present state of the cell
+		/// </summary>
 		internal CellState State { get; set; }
 
+		/// <summary>
+		/// Gets the numeric value of the cell in its current state
+		/// </summary>
+		/// <returns>The value of the cell as a boxed number of the same
+		/// <para> type as its state enumeration underlying type</para>
+		/// </returns>
 		internal object Value
 		{
 			get
@@ -17,6 +26,11 @@ namespace Green_vs_Red.Core
 			}
 		}
 
+		/// <summary>
+		/// Creates a new cell to be positioned in a two-dimensional plane
+		/// </summary>
+		/// <param name="coordinates">The horizontal (X) and vertical (Y) coordinates of the cell</param>
+		/// <param name="state">The initial state of the cell</param>
 		internal Cell((ushort X, ushort Y) coordinates, CellState state)
 		{
 			this.Coordinates = coordinates;

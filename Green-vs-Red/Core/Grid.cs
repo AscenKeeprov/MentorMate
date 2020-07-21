@@ -8,9 +8,20 @@ namespace Green_vs_Red.Core
 	{
 		private Cell[,] cells;
 
+		/// <summary>
+		/// The grid's vertical dimension.
+		/// </summary>
 		internal ushort Height { get; private set; }
+		/// <summary>
+		/// The grid's horizontal dimension.
+		/// </summary>
 		internal ushort Width { get; private set; }
 
+		/// <summary>
+		/// Creates a two-dimensional grid.
+		/// </summary>
+		/// <param name="width">The size of the grid's horizontal axis.</param>
+		/// <param name="height">The size of the grid's vertical axis.</param>
 		internal Grid(ushort width, ushort height)
 		{
 			this.cells = new Cell[height, width];
@@ -18,8 +29,17 @@ namespace Green_vs_Red.Core
 			this.Width = width;
 		}
 
-		internal void AddCell(ushort x, ushort y, CellState state) => this.cells[y, x] = new Cell((x, y), state);
+		/// <summary>
+		/// Adds a cell to the grid based on its coordinates.
+		/// </summary>
+		/// <param name="cell">The cell that is to be placed on the grid.</param>
+		internal void AddCell(Cell cell) => this.cells[cell.Coordinates.Y, cell.Coordinates.X] = cell;
 
+		/// <summary>
+		/// Generates a new layout for the grid according to a set of rules.
+		/// <para>The grid's cells may or may not change their states.</para>
+		/// </summary>
+		/// <returns>A boolean denoting whether any of the cells has changed its state.</returns>
 		internal bool Generate()
 		{
 			Cell[,] newCells = new Cell[this.Height, this.Width];
@@ -67,8 +87,19 @@ namespace Green_vs_Red.Core
 			return statesChanged;
 		}
 
+		/// <summary>
+		/// Retrieves a cell from a specified position on the grid.
+		/// </summary>
+		/// <returns>A cell located at the provided coordinates.</returns>
+		/// <param name="x">The horizontal position of the cell.</param>
+		/// <param name="y">The vertical position of the cell.</param>
 		internal Cell GetCellAt(ushort x, ushort y) => cells[y, x];
 
+		/// <summary>
+		/// Collects all cells surrounding a given cell.
+		/// </summary>
+		/// <returns>A collection of cells.</returns>
+		/// <param name="cell">A cell, the adjacent cells of which should be returned.</param>
 		private List<Cell> GetCellNeighbours(Cell cell)
 		{
 			var cellNeighbours = new List<Cell>();
@@ -84,6 +115,9 @@ namespace Green_vs_Red.Core
 			return cellNeighbours;
 		}
 
+		/// <summary>
+		/// Prints a visual representation of the grid's current layout on the console.
+		/// </summary>
 		internal void Print()
 		{
 			ConsoleColor defaultBackColour = Console.BackgroundColor;

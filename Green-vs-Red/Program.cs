@@ -51,7 +51,7 @@ namespace Green_vs_Red
 					{
 						ulong skippedTurns = endTurn - turn + 1;
 						if (targetCell.State == CellState.Green) greenTargetCellStates += skippedTurns;
-						if (showAllGrids) Console.WriteLine($"Skipping {skippedTurns} turns as the grid has stopped changing.");
+						if (showAllGrids) Console.WriteLine($"Skipping {skippedTurns} visualizations as the grid has stopped changing.");
 						break;
 					}
 				}
@@ -64,6 +64,15 @@ namespace Green_vs_Red
 			}
 		}
 
+		/// <summary>
+		/// Prompts for and attempts to parse input whilst validating it at the same time.
+		/// </summary>
+		/// <typeparam name="T">The type that input should be parsed to.</typeparam>
+		/// <returns>An object of the desired type, upon successful validation.
+		/// <para> If validation fails, makes recurring calls for correct input.</para>
+		/// </returns>
+		/// <param name="prompt">A text message, describing what input is expected.</param>
+		/// <param name="validate">A validation delegate, invoked on the input once parsing succeeds.</param>
 		private static T ParseInput<T>(string prompt, Func<T, bool> validate)
 		{
 			Console.Write(prompt);
@@ -76,6 +85,11 @@ namespace Green_vs_Red
 			return parsedValue;
 		}
 
+		/// <summary>
+		/// Fills in a grid with cells based on user input, row by row.
+		/// <para>A regular expression pattern is used to determine if input is valid.</para>
+		/// </summary>
+		/// <param name="grid">An instance of a grid to populate.</param>
 		private static void PopulateGrid(Grid grid)
 		{
 			(CellState State, object Value)[] cellStates = Enumeration.GetEntries<CellState>();
@@ -89,7 +103,8 @@ namespace Green_vs_Red
 				{
 					CellState cellState = cellStates.FirstOrDefault(cs
 						=> cs.Value.ToString().Equals(gridRow[x].ToString())).State;
-					grid.AddCell(x, y, cellState);
+					Cell cell = new Cell((x, y), cellState);
+					grid.AddCell(cell);
 				}
 			}
 		}
